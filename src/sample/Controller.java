@@ -3,6 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -12,17 +13,27 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
 
     @FXML
     private Button playButton;
-
+    @FXML
+    private Label songLabel;
     @FXML
     private AnchorPane anchorPane;
 
-    MediaPlayer mediaPlayer;
+    private Media media;
+    private  MediaPlayer mediaPlayer;
+
+    private File directory;
+    private File[] files;
+
+    private ArrayList<File> songs;
+
+    private int songNumber = 0;
 
     boolean running = false;
 
@@ -32,10 +43,30 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String bip = "High Pressure Dave-Ny_HsSmiL9A.mp3";
-        Media hit = new Media(new File(bip).toURI().toString());
-        mediaPlayer = new MediaPlayer(hit);
 
+        songs = new ArrayList<>();
+
+        //directory = new File("music");
+        directory = new File("music");
+
+        files = directory.listFiles();
+
+        if(files != null){
+            for(File file : files){
+                String fileName = file.getName();
+                int i = fileName.lastIndexOf(".");
+                String extension = fileName.substring(i + 1);
+                if(extension.equals("mp3")){
+                    songs.add(file);
+                    System.out.println(file + " added to songs");
+                }
+            }
+        }
+
+        media = new Media(songs.get(songNumber).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+
+        songLabel.setText(songs.get(songNumber).getName());
     }
 
     public void playMedia(){
