@@ -24,8 +24,40 @@ public class Main extends Application {
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if(event.getCode() == KeyCode.SPACE){
-                    controller.playMedia();
+                switch(event.getCode()){
+                    case SPACE:
+                        controller.playMedia();
+                        break;
+                    case DIGIT0:
+                        controller.jumpTo(0);
+                        break;
+                    case DIGIT1:
+                        controller.jumpTo(1);
+                        break;
+                    case DIGIT2:
+                        controller.jumpTo(2);
+                        break;
+                    case DIGIT3:
+                        controller.jumpTo(3);
+                        break;
+                    case DIGIT4:
+                        controller.jumpTo(4);
+                        break;
+                    case DIGIT5:
+                        controller.jumpTo(5);
+                        break;
+                    case DIGIT6:
+                        controller.jumpTo(6);
+                        break;
+                    case DIGIT7:
+                        controller.jumpTo(7);
+                        break;
+                    case DIGIT8:
+                        controller.jumpTo(8);
+                        break;
+                    case DIGIT9:
+                        controller.jumpTo(9);
+                        break;
                 }
             }
         });

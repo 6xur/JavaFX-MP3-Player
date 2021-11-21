@@ -8,16 +8,24 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="200.0" prefWidth="550.0" style="-fx-background-color: #161616;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button fx:id="playButton" alignment="CENTER" focusTraversable="false" layoutX="13.0" layoutY="119.0" mnemonicParsing="false" onAction="#playMedia" onMousePressed="#darken" onMouseReleased="#lighten" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 3em; -fx-min-width: 70px; -fx-min-height: 70px; -fx-max-width: 70px; -fx-max-height: 70px; -fx-background-color: linear-gradient(to left, #f83600, #FF512F);" text="▶" textAlignment="CENTER" textFill="BEIGE">
+      <Button fx:id="playButton" alignment="CENTER" focusTraversable="false" layoutX="31.0" layoutY="120.0" mnemonicParsing="false" onAction="#playMedia" onMousePressed="#darkenPlayButton" onMouseReleased="#lightenPlayButton" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 3em; -fx-min-width: 70px; -fx-min-height: 70px; -fx-max-width: 70px; -fx-max-height: 70px; -fx-background-color: linear-gradient(to left, #f83600, #FF512F);" text="▶" textAlignment="CENTER" textFill="BEIGE">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="110.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
-      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="89.0" prefWidth="530.0" text="Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="70.0" prefWidth="530.0" text="Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
+      <Button fx:id="nextButton" focusTraversable="false" layoutX="100.0" layoutY="164.0" mnemonicParsing="false" onAction="#nextMedia" onMousePressed="#darkenNextButton" onMouseReleased="#lightenNextButton" style="-fx-background-color: #161616;" text="⏭" textFill="BEIGE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="previousButton" focusTraversable="false" layoutY="164.0" mnemonicParsing="false" onAction="#previousMedia" onMousePressed="#darkenPreviousButton" onMouseReleased="#lightenPreviousButton" style="-fx-background-color: #161616;" text="⏮" textFill="BEIGE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

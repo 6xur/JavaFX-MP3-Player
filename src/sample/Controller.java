@@ -10,6 +10,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
@@ -20,6 +21,10 @@ public class Controller implements Initializable{
 
     @FXML
     private Button playButton;
+    @FXML
+    private Button previousButton;
+    @FXML
+    private Button nextButton;
     @FXML
     private Label songLabel;
     @FXML
@@ -46,11 +51,11 @@ public class Controller implements Initializable{
 
         songs = new ArrayList<>();
 
-        //directory = new File("music");
         directory = new File("music");
 
         files = directory.listFiles();
 
+        // add only the mp3 files to songs
         if(files != null){
             for(File file : files){
                 String fileName = file.getName();
@@ -79,14 +84,72 @@ public class Controller implements Initializable{
             playButton.setText("⏸");
             running = true;
         }
+        System.out.println("running: " + running);
     }
 
-    public void lighten(){
+    public void jumpTo(int spot){
+        double totalDuration = media.getDuration().toSeconds();
+        double partialDuration = totalDuration / 10;
+        mediaPlayer.seek(Duration.seconds(partialDuration * spot));
+        System.out.println("jumped to: " + partialDuration * spot);
+    }
+
+    public void previousMedia(){
+        if(songNumber > 0){
+            songNumber--;
+        } else{
+            songNumber = songs.size() - 1;
+        }
+        mediaPlayer.stop();
+
+        media = new Media(songs.get(songNumber).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        if(running){
+            mediaPlayer.play();
+        }
+
+        songLabel.setText(songs.get(songNumber).getName());
+    }
+
+    public void nextMedia(){
+        if(songNumber < songs.size() - 1){
+            songNumber++;
+        } else{
+            songNumber = 0;
+        }
+        mediaPlayer.stop();
+
+        media = new Media(songs.get(songNumber).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        if(running){
+            mediaPlayer.play();
+        }
+
+        songLabel.setText(songs.get(songNumber).getName());
+    }
+
+    public void lightenPlayButton(){
         playButton.setTextFill(Color.BEIGE);
     }
 
-    public void darken(){
+    public void darkenPlayButton(){
         playButton.setTextFill(Color.LIGHTGREY);
+    }
+
+    public void lightenPreviousButton(){
+        previousButton.setTextFill(Color.BEIGE);
+    }
+
+    public void darkenPreviousButton(){
+        previousButton.setTextFill(Color.LIGHTGREY);
+    }
+
+    public void lightenNextButton(){
+        nextButton.setTextFill(Color.BEIGE);
+    }
+
+    public void darkenNextButton(){
+        nextButton.setTextFill(Color.LIGHTGREY);
     }
 
     @FXML
