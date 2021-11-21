@@ -48,6 +48,7 @@ public class Main extends Application {
         stage.setTitle("Music App");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+        //test
     }
 
 
