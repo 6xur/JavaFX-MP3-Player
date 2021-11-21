@@ -24,7 +24,7 @@ public class Controller implements Initializable{
 
     MediaPlayer mediaPlayer;
 
-    int playStatus = 0;
+    boolean running = false;
 
     double dX;
     double dY;
@@ -38,15 +38,15 @@ public class Controller implements Initializable{
 
     }
 
-    public void playAudio(){
-        if(playStatus == 0){
+    public void playMedia(){
+        if(running){
+            mediaPlayer.pause();
+            playButton.setText("▶");
+            running = false;
+        } else{
             mediaPlayer.play();
             playButton.setText("⏸");
-            playStatus = 1;
-        } else if(playStatus == 1){
-            mediaPlayer.pause();
-            playStatus = 0;
-            playButton.setText("▶");
+            running = true;
         }
     }
 

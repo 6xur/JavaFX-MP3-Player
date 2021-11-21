@@ -1,11 +1,14 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
@@ -42,8 +45,20 @@ public class Main extends Application {
 //        stage.setScene(scene);
 //        stage.show();
 
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
         Scene scene = new Scene(root);
+
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCode() == KeyCode.SPACE){
+                    controller.playMedia();
+                }
+            }
+        });
+
         stage.setScene(scene);
         stage.setTitle("Music App");
         stage.initStyle(StageStyle.UNDECORATED);

@@ -7,7 +7,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="200.0" prefWidth="550.0" style="-fx-background-color: #161616;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button fx:id="playButton" alignment="CENTER" focusTraversable="false" layoutX="13.0" layoutY="119.0" mnemonicParsing="false" onAction="#playAudio" onMousePressed="#darken" onMouseReleased="#lighten" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 3em; -fx-min-width: 70px; -fx-min-height: 70px; -fx-max-width: 70px; -fx-max-height: 70px; -fx-background-color: linear-gradient(to left, #f83600, #FF512F);" text="⏸" textAlignment="CENTER" textFill="BEIGE">
+      <Button fx:id="playButton" alignment="CENTER" focusTraversable="false" layoutX="13.0" layoutY="119.0" mnemonicParsing="false" onAction="#playMedia" onMousePressed="#darken" onMouseReleased="#lighten" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 3em; -fx-min-width: 70px; -fx-min-height: 70px; -fx-max-width: 70px; -fx-max-height: 70px; -fx-background-color: linear-gradient(to left, #f83600, #FF512F);" text="▶" textAlignment="CENTER" textFill="BEIGE">
          <font>
             <Font size="25.0" />
          </font>
