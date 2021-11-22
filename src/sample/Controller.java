@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -79,6 +80,7 @@ public class Controller implements Initializable{
         mediaPlayer = new MediaPlayer(media);
 
         songLabel.setText(songs.get(songNumber).getName());
+        songProgressBar.setStyle("-fx-accent: #f83600;");
     }
 
     public void playMedia(){
@@ -122,7 +124,6 @@ public class Controller implements Initializable{
         mediaPlayer = new MediaPlayer(media);
         if(running){
             cancelTimer();
-            //playMedia();
         }
 
         songLabel.setText(songs.get(songNumber).getName());
@@ -143,7 +144,6 @@ public class Controller implements Initializable{
 
         if(running){
             cancelTimer();  // running becomes false
-            //playMedia();
         }
 
         songLabel.setText(songs.get(songNumber).getName());
@@ -189,17 +189,23 @@ public class Controller implements Initializable{
                 double end = media.getDuration().toSeconds();
                 songProgressBar.setProgress(current / end);
 
-                if(current/end == 1){
+                if(current/end == 1){  // song ends
                     mediaPlayer.stop();
 
-                    //TODO: FIX THIS, media player works but other JavaFX stuff doesn't work
-                    playButton.setText("lmao");
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            nextMedia();
+                        }
+                    });
+
                     //nextMedia();
+                    //TODO: understand how the progress bar works
                 }
             }
         };
 
-        timer.scheduleAtFixedRate(task, 0, 100);
+        timer.scheduleAtFixedRate(task, 0, 100);  // update the progress bar every 0.1 second
     }
 
     public void cancelTimer(){

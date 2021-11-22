@@ -15,7 +15,7 @@
          </font>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="110.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
-      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="30.0" prefHeight="70.0" prefWidth="530.0" text="Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="39.0" prefHeight="70.0" prefWidth="530.0" text="Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="SansSerif Regular" size="23.0" />
          </font>
@@ -28,6 +28,6 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <ProgressBar fx:id="songProgressBar" layoutY="101.0" prefHeight="18.0" prefWidth="550.0" progress="0.0" />
+      <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="100.0" prefHeight="10.0" prefWidth="550.0" progress="0.0" />
    </children>
 </AnchorPane>
