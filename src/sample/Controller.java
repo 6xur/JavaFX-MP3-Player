@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -80,7 +81,7 @@ public class Controller implements Initializable{
         mediaPlayer = new MediaPlayer(media);
 
         songLabel.setText(songs.get(songNumber).getName());
-        songProgressBar.setStyle("-fx-accent: #f83600;");
+
     }
 
     public void playMedia(){

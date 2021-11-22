@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="200.0" prefWidth="550.0" style="-fx-background-color: #161616;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="200.0" prefWidth="550.0" style="-fx-background-color: #161616;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Button fx:id="playButton" alignment="CENTER" focusTraversable="false" layoutX="31.0" layoutY="120.0" mnemonicParsing="false" onAction="#playOrPause" onMousePressed="#darkenPlayButton" onMouseReleased="#lightenPlayButton" prefHeight="90.0" prefWidth="90.0" style="-fx-background-radius: 3em; -fx-min-width: 70px; -fx-min-height: 70px; -fx-max-width: 70px; -fx-max-height: 70px; -fx-background-color: linear-gradient(to left, #f83600, #FF512F);" text="▶" textAlignment="CENTER" textFill="BEIGE">
          <font>
@@ -28,6 +28,6 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="100.0" prefHeight="10.0" prefWidth="550.0" progress="0.0" />
+      <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="110.0" prefHeight="5.0" prefWidth="550.0" progress="0.0" style="-fx-accent: #f83600;" />
    </children>
 </AnchorPane>
