@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -16,6 +17,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Controller implements Initializable{
 
@@ -29,6 +32,8 @@ public class Controller implements Initializable{
     private Label songLabel;
     @FXML
     private AnchorPane anchorPane;
+    @FXML
+    private ProgressBar songProgressBar;
 
     private Media media;
     private  MediaPlayer mediaPlayer;
@@ -40,6 +45,8 @@ public class Controller implements Initializable{
 
     private int songNumber = 0;
 
+    private Timer timer;
+    private TimerTask task;
     boolean running = false;
 
     double dX;
@@ -75,14 +82,22 @@ public class Controller implements Initializable{
     }
 
     public void playMedia(){
+        beginTimer();
+        mediaPlayer.play();
+        playButton.setText("⏸");
+    }
+
+    public void pauseMedia(){
+        cancelTimer();
+        mediaPlayer.pause();
+        playButton.setText("▶");
+    }
+
+    public void playOrPause(){
         if(running){
-            mediaPlayer.pause();
-            playButton.setText("▶");
-            running = false;
+            pauseMedia();
         } else{
-            mediaPlayer.play();
-            playButton.setText("⏸");
-            running = true;
+            playMedia();
         }
         System.out.println("running: " + running);
     }
@@ -90,6 +105,7 @@ public class Controller implements Initializable{
     public void jumpTo(int spot){
         double totalDuration = media.getDuration().toSeconds();
         double partialDuration = totalDuration / 10;
+        songProgressBar.setProgress(partialDuration * spot / totalDuration);
         mediaPlayer.seek(Duration.seconds(partialDuration * spot));
         System.out.println("jumped to: " + partialDuration * spot);
     }
@@ -105,10 +121,13 @@ public class Controller implements Initializable{
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         if(running){
-            mediaPlayer.play();
+            cancelTimer();
+            //playMedia();
         }
 
         songLabel.setText(songs.get(songNumber).getName());
+
+        playMedia();
     }
 
     public void nextMedia(){
@@ -121,50 +140,71 @@ public class Controller implements Initializable{
 
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+
         if(running){
-            mediaPlayer.play();
+            cancelTimer();  // running becomes false
+            //playMedia();
         }
 
         songLabel.setText(songs.get(songNumber).getName());
+
+        playMedia();
     }
 
-    public void lightenPlayButton(){
-        playButton.setTextFill(Color.BEIGE);
-    }
+    public void lightenPlayButton(){ playButton.setTextFill(Color.BEIGE); }
 
-    public void darkenPlayButton(){
-        playButton.setTextFill(Color.LIGHTGREY);
-    }
+    public void darkenPlayButton(){ playButton.setTextFill(Color.LIGHTGREY); }
 
-    public void lightenPreviousButton(){
-        previousButton.setTextFill(Color.BEIGE);
-    }
+    public void lightenPreviousButton(){ previousButton.setTextFill(Color.BEIGE); }
 
-    public void darkenPreviousButton(){
-        previousButton.setTextFill(Color.LIGHTGREY);
-    }
+    public void darkenPreviousButton(){ previousButton.setTextFill(Color.LIGHTGREY); }
 
-    public void lightenNextButton(){
-        nextButton.setTextFill(Color.BEIGE);
-    }
+    public void lightenNextButton(){ nextButton.setTextFill(Color.BEIGE); }
 
-    public void darkenNextButton(){
-        nextButton.setTextFill(Color.LIGHTGREY);
-    }
+    public void darkenNextButton(){ nextButton.setTextFill(Color.LIGHTGREY); }
 
-    @FXML
-    protected void setOnMousePressed(MouseEvent event) {
+
+    public void setOnMousePressed(MouseEvent event) {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         dX = stage.getX() - event.getScreenX();
         dY = stage.getY() - event.getScreenY();
     }
 
-    @FXML
-    protected void setOnMouseDragged(MouseEvent event) {
+
+    public void setOnMouseDragged(MouseEvent event) {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setX(event.getScreenX() + dX);
         stage.setY(event.getScreenY() + dY);
     }
 
+    public void beginTimer(){
+        timer = new Timer();
+
+        task = new TimerTask(){
+            @Override
+            public void run() {
+
+                running = true;
+                double current = mediaPlayer.getCurrentTime().toSeconds();
+                double end = media.getDuration().toSeconds();
+                songProgressBar.setProgress(current / end);
+
+                if(current/end == 1){
+                    mediaPlayer.stop();
+
+                    //TODO: FIX THIS, media player works but other JavaFX stuff doesn't work
+                    playButton.setText("lmao");
+                    //nextMedia();
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(task, 0, 100);
+    }
+
+    public void cancelTimer(){
+        running = false;
+        timer.cancel();
+    }
 
 }

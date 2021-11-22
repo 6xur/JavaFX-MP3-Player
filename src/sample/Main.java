@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,7 +25,7 @@ public class Main extends Application {
             public void handle(KeyEvent event) {
                 switch(event.getCode()){
                     case SPACE:
-                        controller.playMedia();
+                        controller.playOrPause();
                         break;
                     case DIGIT0:
                         controller.jumpTo(0);
