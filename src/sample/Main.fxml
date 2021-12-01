@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -18,7 +19,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="110.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="112.0" layoutY="-2.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
       <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="39.0" prefHeight="70.0" prefWidth="530.0" text="Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Segoe UI Semibold" size="18.0" />
@@ -32,10 +33,11 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="110.0" prefHeight="3.0" prefWidth="550.0" progress="0.0" style="-fx-accent: #f83600;" />
-      <Button fx:id="logOutButton" focusTraversable="false" layoutX="524.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="26.0" styleClass="logout-button" text="—" textFill="WHITE" wrapText="true">
+      <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="110.0" onMouseDragged="#progressBarOnDragged" onMouseReleased="#progressBarOnReleased" prefHeight="5.0" prefWidth="550.0" progress="0.0" />
+      <Button fx:id="logOutButton" focusTraversable="false" layoutX="524.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="26.0" styleClass="logout-button" text="✖" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Segoe UI Black" size="10.0" />
+            <Font name="Segoe UI Emoji" size="10.0" />
          </font></Button>
+      <Line endX="390.0" endY="2.0" layoutX="160.0" layoutY="25.0" startX="-164.7666778564453" startY="2.0" stroke="#787979" strokeWidth="0.2" />
    </children>
 </AnchorPane>

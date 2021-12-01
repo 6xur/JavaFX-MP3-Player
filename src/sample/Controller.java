@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -108,12 +109,11 @@ public class Controller implements Initializable{
         System.out.println("running: " + running);
     }
 
-    public void jumpTo(int spot){
+    public void jumpTo(double spot){
         double totalDuration = media.getDuration().toSeconds();
-        double partialDuration = totalDuration / 10;
-        songProgressBar.setProgress(partialDuration * spot / totalDuration);
-        mediaPlayer.seek(Duration.seconds(partialDuration * spot));
-        System.out.println("jumped to: " + partialDuration * spot);
+        songProgressBar.setProgress(spot);
+        mediaPlayer.seek(Duration.seconds(totalDuration * spot));
+        System.out.println("jumped to: " + totalDuration * spot);
     }
 
     public void previousMedia(){
@@ -179,6 +179,37 @@ public class Controller implements Initializable{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setX(event.getScreenX() + dX);
         stage.setY(event.getScreenY() + dY);
+    }
+
+    public void progressBarOnClicked(MouseEvent event){
+        Bounds b1 = songProgressBar.getLayoutBounds();
+        double mouseX = event.getSceneX();
+        double percent = (((b1.getMinX() + mouseX)) / b1.getMaxX());
+        System.out.println(percent);
+        songProgressBar.setProgress(percent);
+        //do something with progress in percent
+        //TODO: add functionality
+    }
+
+    public void progressBarOnDragged(MouseEvent event){
+        if(running){
+            pauseMedia();
+        }
+        Bounds b1 = songProgressBar.getLayoutBounds();
+        double mouseX = event.getSceneX();
+        double percent = (((b1.getMinX() + mouseX)) / b1.getMaxX());
+        songProgressBar.setProgress(percent);
+    }
+
+    public void progressBarOnReleased(MouseEvent event){
+        Bounds b1 = songProgressBar.getLayoutBounds();
+        double mouseX = event.getSceneX();
+        double percent = (((b1.getMinX() + mouseX)) / b1.getMaxX());
+        jumpTo(percent);
+        if(!running){
+            playMedia();
+        }
+        System.out.println(percent);
     }
 
     public void beginTimer(){

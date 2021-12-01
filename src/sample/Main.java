@@ -31,31 +31,31 @@ public class Main extends Application {
                         controller.jumpTo(0);
                         break;
                     case DIGIT1:
-                        controller.jumpTo(1);
+                        controller.jumpTo(0.1);
                         break;
                     case DIGIT2:
-                        controller.jumpTo(2);
+                        controller.jumpTo(0.2);
                         break;
                     case DIGIT3:
-                        controller.jumpTo(3);
+                        controller.jumpTo(0.3);
                         break;
                     case DIGIT4:
-                        controller.jumpTo(4);
+                        controller.jumpTo(0.4);
                         break;
                     case DIGIT5:
-                        controller.jumpTo(5);
+                        controller.jumpTo(0.5);
                         break;
                     case DIGIT6:
-                        controller.jumpTo(6);
+                        controller.jumpTo(0.6);
                         break;
                     case DIGIT7:
-                        controller.jumpTo(7);
+                        controller.jumpTo(0.7);
                         break;
                     case DIGIT8:
-                        controller.jumpTo(8);
+                        controller.jumpTo(0.8);
                         break;
                     case DIGIT9:
-                        controller.jumpTo(9);
+                        controller.jumpTo(0.9);
                         break;
                 }
             }
