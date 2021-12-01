@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -36,6 +37,8 @@ public class Controller implements Initializable{
     private AnchorPane anchorPane;
     @FXML
     private ProgressBar songProgressBar;
+    @FXML
+    private Button logOutButton;
 
     private Media media;
     private  MediaPlayer mediaPlayer;
@@ -212,6 +215,15 @@ public class Controller implements Initializable{
     public void cancelTimer(){
         running = false;
         timer.cancel();
+    }
+
+    public void logout(ActionEvent event){
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        System.out.println("logged out");
+        if(running){
+            pauseMedia();
+        }
+        stage.close();
     }
 
 }

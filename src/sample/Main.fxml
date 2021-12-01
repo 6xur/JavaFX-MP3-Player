@@ -33,5 +33,9 @@
             <Font size="20.0" />
          </font></Button>
       <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="110.0" prefHeight="3.0" prefWidth="550.0" progress="0.0" style="-fx-accent: #f83600;" />
+      <Button fx:id="logOutButton" focusTraversable="false" layoutX="524.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="26.0" styleClass="logout-button" text="—" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Black" size="10.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -62,9 +62,9 @@ public class Main extends Application {
         });
 
         stage.setScene(scene);
-        stage.setTitle("Music App");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+
     }
 
 
