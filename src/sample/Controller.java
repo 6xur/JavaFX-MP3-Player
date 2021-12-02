@@ -234,7 +234,6 @@ public class Controller implements Initializable{
                         }
                     });
 
-                    //nextMedia();
                     //TODO: understand how the progress bar works
                 }
             }
@@ -255,6 +254,11 @@ public class Controller implements Initializable{
             pauseMedia();
         }
         stage.close();
+    }
+
+    public void minimize(ActionEvent event){
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        stage.setIconified(true);
     }
 
 }

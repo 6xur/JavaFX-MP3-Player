@@ -24,3 +24,16 @@
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
 }
+
+.minimize_button {
+    -fx-background-color: transparent;
+}
+
+.minimize_button:hover{
+    -fx-background-color: #4e4d53;
+}
+
+.pane {
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-radius: 0 0 5 5;
+}

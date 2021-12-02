@@ -9,9 +9,29 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="200.0" prefWidth="550.0" style="-fx-background-color: #161616;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="200.0" prefWidth="550.0" style="-fx-background-color: #161616;" styleClass="pane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button fx:id="playButton" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="46.0" layoutY="122.0" maxHeight="70.0" mnemonicParsing="false" onAction="#playOrPause" onMousePressed="#darkenPlayButton" onMouseReleased="#lightenPlayButton" prefHeight="70.0" prefWidth="60.0" style="-fx-background-radius: 3em; -fx-min-width: 65px; -fx-min-height: 65px; -fx-max-width: 65px; -fx-max-height: 65px; -fx-background-color: #c4302b; -fx-padding: -5;" text="▶" textAlignment="CENTER" textFill="BEIGE" textOverrun="CLIP">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="112.0" layoutY="-2.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
+      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="39.0" prefHeight="70.0" prefWidth="530.0" text="song_name" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Semibold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="nextButton" focusTraversable="false" layoutX="101.0" layoutY="130.0" mnemonicParsing="false" onAction="#nextMedia" onMousePressed="#darkenNextButton" onMouseReleased="#lightenNextButton" style="-fx-background-color: #161616;" text="⏭" textFill="BEIGE">
+         <font>
+            <Font size="26.0" />
+         </font></Button>
+      <Button fx:id="previousButton" focusTraversable="false" layoutX="-5.0" layoutY="130.0" mnemonicParsing="false" onAction="#previousMedia" onMousePressed="#darkenPreviousButton" onMouseReleased="#lightenPreviousButton" style="-fx-background-color: #161616;" text="⏮" textFill="BEIGE">
+         <font>
+            <Font size="26.0" />
+         </font></Button>
+      <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="110.0" onMouseDragged="#progressBarOnDragged" onMouseReleased="#progressBarOnReleased" prefHeight="5.0" prefWidth="550.0" progress="0.0" />
+      <Button fx:id="logOutButton" focusTraversable="false" layoutX="516.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="33.0" styleClass="logout-button" text="✖" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Emoji" size="10.0" />
+         </font></Button>
+      <Line endX="390.0" endY="2.0" layoutX="160.0" layoutY="25.0" startX="-164.7666778564453" startY="2.0" stroke="#787979" strokeWidth="0.2" />
+      <Button fx:id="playButton" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="45.0" layoutY="125.0" maxHeight="70.0" mnemonicParsing="false" onAction="#playOrPause" onMousePressed="#darkenPlayButton" onMouseReleased="#lightenPlayButton" prefHeight="70.0" prefWidth="60.0" style="-fx-background-radius: 3em; -fx-min-width: 63; -fx-min-height: 63; -fx-max-width: 63; -fx-max-height: 63; -fx-background-color: linear-gradient(to right, #E44D26, #F16529); -fx-padding: -5;" text="▶" textAlignment="CENTER" textFill="BEIGE" textOverrun="CLIP">
          <font>
             <Font size="48.0" />
          </font>
@@ -19,25 +39,9 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="112.0" layoutY="-2.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
-      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="39.0" prefHeight="70.0" prefWidth="530.0" text="Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button focusTraversable="false" layoutX="480.0" mnemonicParsing="false" onAction="#minimize" prefHeight="26.0" prefWidth="33.0" styleClass="minimize_button" text="—" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Segoe UI Semibold" size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="nextButton" focusTraversable="false" layoutX="115.0" layoutY="130.0" mnemonicParsing="false" onAction="#nextMedia" onMousePressed="#darkenNextButton" onMouseReleased="#lightenNextButton" style="-fx-background-color: #161616;" text="⏭" textFill="BEIGE">
-         <font>
-            <Font size="20.0" />
+            <Font name="Segoe UI Black" size="10.0" />
          </font></Button>
-      <Button fx:id="previousButton" focusTraversable="false" layoutY="130.0" mnemonicParsing="false" onAction="#previousMedia" onMousePressed="#darkenPreviousButton" onMouseReleased="#lightenPreviousButton" style="-fx-background-color: #161616;" text="⏮" textFill="BEIGE">
-         <font>
-            <Font size="20.0" />
-         </font></Button>
-      <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="110.0" onMouseDragged="#progressBarOnDragged" onMouseReleased="#progressBarOnReleased" prefHeight="5.0" prefWidth="550.0" progress="0.0" />
-      <Button fx:id="logOutButton" focusTraversable="false" layoutX="524.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="26.0" styleClass="logout-button" text="✖" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Segoe UI Emoji" size="10.0" />
-         </font></Button>
-      <Line endX="390.0" endY="2.0" layoutX="160.0" layoutY="25.0" startX="-164.7666778564453" startY="2.0" stroke="#787979" strokeWidth="0.2" />
    </children>
 </AnchorPane>
