@@ -65,7 +65,7 @@ public class Controller implements Initializable{
 
         songs = new ArrayList<>();
 
-        directory = new File("music");
+        directory = new File("C:\\Users\\Robert\\Music");
 
         files = directory.listFiles();
 
@@ -203,7 +203,7 @@ public class Controller implements Initializable{
                 songProgressBar.setProgress(current / end);
 
                 if(current/end == 1){  // song ends
-                    mediaPlayer.stop();
+                    //mediaPlayer.stop();
 
                     Platform.runLater(new Runnable(){
                         @Override
