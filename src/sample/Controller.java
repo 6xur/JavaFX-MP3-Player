@@ -55,6 +55,7 @@ public class Controller implements Initializable{
     private TimerTask task;
     boolean running = false;
 
+    // for dragging the window
     double dX;
     double dY;
 
@@ -106,7 +107,6 @@ public class Controller implements Initializable{
         } else{
             playMedia();
         }
-        System.out.println("running: " + running);
     }
 
     public void jumpTo(double spot){
@@ -155,18 +155,6 @@ public class Controller implements Initializable{
         playMedia();
     }
 
-    public void lightenPlayButton(){ playButton.setTextFill(Color.BEIGE); }
-
-    public void darkenPlayButton(){ playButton.setTextFill(Color.LIGHTGREY); }
-
-    public void lightenPreviousButton(){ previousButton.setTextFill(Color.BEIGE); }
-
-    public void darkenPreviousButton(){ previousButton.setTextFill(Color.LIGHTGREY); }
-
-    public void lightenNextButton(){ nextButton.setTextFill(Color.BEIGE); }
-
-    public void darkenNextButton(){ nextButton.setTextFill(Color.LIGHTGREY); }
-
 
     public void setOnMousePressed(MouseEvent event) {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
@@ -179,16 +167,6 @@ public class Controller implements Initializable{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setX(event.getScreenX() + dX);
         stage.setY(event.getScreenY() + dY);
-    }
-
-    public void progressBarOnClicked(MouseEvent event){
-        Bounds b1 = songProgressBar.getLayoutBounds();
-        double mouseX = event.getSceneX();
-        double percent = (((b1.getMinX() + mouseX)) / b1.getMaxX());
-        System.out.println(percent);
-        songProgressBar.setProgress(percent);
-        //do something with progress in percent
-        //TODO: add functionality
     }
 
     public void progressBarOnDragged(MouseEvent event){
@@ -249,7 +227,6 @@ public class Controller implements Initializable{
 
     public void logout(ActionEvent event){
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        System.out.println("logged out");
         if(running){
             pauseMedia();
         }
