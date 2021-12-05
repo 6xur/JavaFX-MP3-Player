@@ -39,7 +39,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button focusTraversable="false" layoutX="480.0" mnemonicParsing="false" onAction="#minimize" prefHeight="26.0" prefWidth="33.0" styleClass="minimize-button" text="—" textFill="#e5e5e5" wrapText="true">
+      <Button fx:id="minimizeButton" focusTraversable="false" layoutX="480.0" mnemonicParsing="false" onAction="#minimize" prefHeight="26.0" prefWidth="33.0" styleClass="minimize-button" text="—" textFill="#e5e5e5" wrapText="true">
          <font>
             <Font name="Segoe UI Black" size="10.0" />
          </font></Button>

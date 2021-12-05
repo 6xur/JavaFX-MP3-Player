@@ -42,6 +42,8 @@ public class Controller implements Initializable{
     private ProgressBar songProgressBar;
     @FXML
     private Button logOutButton;
+    @FXML
+    private Button minimizeButton;
 
     private Media media;
     private  MediaPlayer mediaPlayer;
@@ -141,6 +143,7 @@ public class Controller implements Initializable{
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
+        // need setOnReady here
         mediaPlayer.setOnReady(new Runnable() {
             @Override
             public void run() {
@@ -182,23 +185,9 @@ public class Controller implements Initializable{
     }
 
     public void skipTo(double spot){
-        double totalDuration = media.getDuration().toSeconds();
-        //songProgressBar.setProgress(spot);
-        mediaPlayer.seek(Duration.seconds(totalDuration * spot));
-        System.out.println("jumped to: " + totalDuration * spot);
-    }
-
-    public void setOnMousePressed(MouseEvent event) {
-        Stage stage = (Stage) anchorPane.getScene().getWindow();
-        dX = stage.getX() - event.getScreenX();
-        dY = stage.getY() - event.getScreenY();
-    }
-
-
-    public void setOnMouseDragged(MouseEvent event) {
-        Stage stage = (Stage) anchorPane.getScene().getWindow();
-        stage.setX(event.getScreenX() + dX);
-        stage.setY(event.getScreenY() + dY);
+        double duration = media.getDuration().toSeconds();
+        mediaPlayer.seek(Duration.seconds(duration * spot));
+        //System.out.println("jumped to: " + duration * spot);
     }
 
     public void progressBarOnDragged(MouseEvent event){
@@ -275,6 +264,19 @@ public class Controller implements Initializable{
     public void cancelTimer(){
         running = false;
         timer.cancel();
+    }
+
+    public void setOnMousePressed(MouseEvent event) {
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        dX = stage.getX() - event.getScreenX();
+        dY = stage.getY() - event.getScreenY();
+    }
+
+
+    public void setOnMouseDragged(MouseEvent event) {
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        stage.setX(event.getScreenX() + dX);
+        stage.setY(event.getScreenY() + dY);
     }
 
     public void logout(ActionEvent event){
