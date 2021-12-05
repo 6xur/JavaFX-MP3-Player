@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -13,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -34,6 +32,10 @@ public class Controller implements Initializable{
     private Button nextButton;
     @FXML
     private Label songLabel;
+    @FXML
+    private Label durationLabel;
+    @FXML
+    private Label playedTimeLabel;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -86,7 +88,21 @@ public class Controller implements Initializable{
         mediaPlayer = new MediaPlayer(media);
 
         songLabel.setText(songs.get(songNumber).getName());
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                String playedTime = formatSeconds(mediaPlayer.getCurrentTime().toSeconds());
+                String duration = formatSeconds(media.getDuration().toSeconds());
+                playedTimeLabel.setText(playedTime);
+                durationLabel.setText(duration);
+            }
+        });
+    }
 
+    public String formatSeconds(double totalSecs){
+        int minutes = (int) totalSecs / 60;
+        int seconds = (int) totalSecs - minutes * 60;
+        return String.format("%d:%02d", minutes, seconds);
     }
 
     public void playMedia(){
@@ -101,7 +117,7 @@ public class Controller implements Initializable{
         playButton.setText("▶");
     }
 
-    public void playOrPause(){
+    public void toggleMedia(){
         if(running){
             pauseMedia();
         } else{
@@ -109,52 +125,68 @@ public class Controller implements Initializable{
         }
     }
 
-    public void jumpTo(double spot){
-        double totalDuration = media.getDuration().toSeconds();
-        songProgressBar.setProgress(spot);
-        mediaPlayer.seek(Duration.seconds(totalDuration * spot));
-        System.out.println("jumped to: " + totalDuration * spot);
-    }
-
     public void previousMedia(){
-        if(songNumber > 0){
-            songNumber--;
-        } else{
-            songNumber = songs.size() - 1;
-        }
         mediaPlayer.stop();
 
-        media = new Media(songs.get(songNumber).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
         if(running){
             cancelTimer();
         }
 
-        songLabel.setText(songs.get(songNumber).getName());
+        if(songNumber > 0){
+            songNumber--;
+        } else{
+            songNumber = songs.size() - 1;  // loop to last song if there's no previous song
+        }
+
+        media = new Media(songs.get(songNumber).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                String duration = formatSeconds(media.getDuration().toSeconds());
+                durationLabel.setText(duration);
+                songLabel.setText(songs.get(songNumber).getName());
+            }
+        });
 
         playMedia();
     }
 
     public void nextMedia(){
+        mediaPlayer.stop();
+
+        if(running){
+            cancelTimer();
+        }
+
         if(songNumber < songs.size() - 1){
             songNumber++;
         } else{
-            songNumber = 0;
+            songNumber = 0;  // loop to first song if there's no next song
         }
-        mediaPlayer.stop();
 
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
-        if(running){
-            cancelTimer();  // running becomes false
-        }
-
-        songLabel.setText(songs.get(songNumber).getName());
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                String duration = formatSeconds(media.getDuration().toSeconds());
+                durationLabel.setText(duration);
+                songLabel.setText(songs.get(songNumber).getName());
+            }
+        });
 
         playMedia();
     }
 
+    public void skipTo(double spot){
+        double totalDuration = media.getDuration().toSeconds();
+        //songProgressBar.setProgress(spot);
+        mediaPlayer.seek(Duration.seconds(totalDuration * spot));
+        System.out.println("jumped to: " + totalDuration * spot);
+    }
 
     public void setOnMousePressed(MouseEvent event) {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
@@ -173,21 +205,37 @@ public class Controller implements Initializable{
         if(running){
             pauseMedia();
         }
-        Bounds b1 = songProgressBar.getLayoutBounds();
+
+        // update the progress bar
+        Bounds bound = songProgressBar.getLayoutBounds();
         double mouseX = event.getSceneX();
-        double percent = (((b1.getMinX() + mouseX)) / b1.getMaxX());
+        double percent = (((bound.getMinX() + mouseX)) / bound.getMaxX());
         songProgressBar.setProgress(percent);
+
+        // update the played time label
+        double duration = media.getDuration().toSeconds();
+        double length = percent * duration;
+        String playedTime = formatSeconds(length);
+        if(0 < length && length < duration){
+            Platform.runLater(() -> {
+                playedTimeLabel.setText(playedTime);
+            });
+        }
+
     }
 
     public void progressBarOnReleased(MouseEvent event){
-        Bounds b1 = songProgressBar.getLayoutBounds();
+        Bounds bound = songProgressBar.getLayoutBounds();
         double mouseX = event.getSceneX();
-        double percent = (((b1.getMinX() + mouseX)) / b1.getMaxX());
-        jumpTo(percent);
+        double percent = (((bound.getMinX() + mouseX)) / bound.getMaxX());
+        if(percent < 0){  // restart the song if dragged to the origin
+            skipTo(0);
+        } else{
+            skipTo(percent);
+        }
         if(!running){
             playMedia();
         }
-        System.out.println(percent);
     }
 
     public void beginTimer(){
@@ -200,10 +248,15 @@ public class Controller implements Initializable{
                 running = true;
                 double current = mediaPlayer.getCurrentTime().toSeconds();
                 double end = media.getDuration().toSeconds();
-                songProgressBar.setProgress(current / end);
+
+
+                String playedTime = formatSeconds(mediaPlayer.getCurrentTime().toSeconds());
+                Platform.runLater(() -> {
+                    songProgressBar.setProgress(current / end);
+                    playedTimeLabel.setText(playedTime);
+                });
 
                 if(current/end == 1){  // song ends
-                    //mediaPlayer.stop();
 
                     Platform.runLater(new Runnable(){
                         @Override
@@ -212,7 +265,6 @@ public class Controller implements Initializable{
                         }
                     });
 
-                    //TODO: understand how the progress bar works
                 }
             }
         };

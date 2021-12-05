@@ -26,37 +26,37 @@ public class Main extends Application {
             public void handle(KeyEvent event) {
                 switch(event.getCode()){
                     case SPACE:
-                        controller.playOrPause();
+                        controller.toggleMedia();
                         break;
                     case DIGIT0:
-                        controller.jumpTo(0);
+                        controller.skipTo(0);
                         break;
                     case DIGIT1:
-                        controller.jumpTo(0.1);
+                        controller.skipTo(0.1);
                         break;
                     case DIGIT2:
-                        controller.jumpTo(0.2);
+                        controller.skipTo(0.2);
                         break;
                     case DIGIT3:
-                        controller.jumpTo(0.3);
+                        controller.skipTo(0.3);
                         break;
                     case DIGIT4:
-                        controller.jumpTo(0.4);
+                        controller.skipTo(0.4);
                         break;
                     case DIGIT5:
-                        controller.jumpTo(0.5);
+                        controller.skipTo(0.5);
                         break;
                     case DIGIT6:
-                        controller.jumpTo(0.6);
+                        controller.skipTo(0.6);
                         break;
                     case DIGIT7:
-                        controller.jumpTo(0.7);
+                        controller.skipTo(0.7);
                         break;
                     case DIGIT8:
-                        controller.jumpTo(0.8);
+                        controller.skipTo(0.8);
                         break;
                     case DIGIT9:
-                        controller.jumpTo(0.9);
+                        controller.skipTo(0.9);
                         break;
                 }
             }
