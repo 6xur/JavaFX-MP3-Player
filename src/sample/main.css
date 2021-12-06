@@ -1,38 +1,3 @@
-.progress-bar .bar {
-    -fx-padding: 1px;
-    -fx-background-insets: 0;
-    -fx-background-color: linear-gradient(to right, #f83600, #F37335);
-}
-
-.progress-bar .track {
-    -fx-control-inner-background: #592c03;
-    -fx-text-box-border: #592c03;
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-}
-
-.logout-button {
-    -fx-background-color: transparent;
-}
-
-.logout-button:hover{
-    -fx-background-color: #e81123;
-    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-    -fx-background-radius: 3px, 3px, 2px, 1px;
-    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
-    -fx-text-fill: white;
-    -fx-alignment: CENTER;
-    -fx-content-display: LEFT;
-}
-
-.minimize-button {
-    -fx-background-color: transparent;
-}
-
-.minimize-button:hover{
-    -fx-background-color: #4e4d53;
-}
-
 .play-button {
     -fx-background-radius: 3em;
     -fx-min-width: 63;
@@ -54,6 +19,41 @@
 
 .next-button:hover{
     -fx-text-fill: #ffffff;
+}
+
+.minimize-button {
+    -fx-background-color: transparent;
+}
+
+.minimize-button:hover{
+    -fx-background-color: #4e4d53;
+}
+
+.logout-button {
+    -fx-background-color: transparent;
+}
+
+.logout-button:hover{
+    -fx-background-color: #e81123;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+
+.progress-bar .bar {
+    -fx-padding: 1px;
+    -fx-background-insets: 0;
+    -fx-background-color: linear-gradient(to right, #f83600, #F37335);
+}
+
+.progress-bar .track {
+    -fx-control-inner-background: #592c03;
+    -fx-text-box-border: #592c03;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
 }
 
 .pane {

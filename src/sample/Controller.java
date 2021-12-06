@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -24,6 +25,8 @@ import java.util.TimerTask;
 
 public class Controller implements Initializable{
 
+    @FXML
+    private Button chooseButton;
     @FXML
     private Button playButton;
     @FXML
@@ -67,24 +70,9 @@ public class Controller implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        songs = new ArrayList<>();
-
-        directory = new File("music");
-
+        directory = new File("music");  // initial directory
         files = directory.listFiles();
-
-        // add only the mp3 files to songs
-        if(files != null){
-            for(File file : files){
-                String fileName = file.getName();
-                int i = fileName.lastIndexOf(".");
-                String extension = fileName.substring(i + 1);
-                if(extension.equals("mp3")){
-                    songs.add(file);
-                    System.out.println(file + " added to songs");
-                }
-            }
-        }
+        songs = addAllSongs();  // add only the MP3 files to songs
 
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
@@ -189,6 +177,44 @@ public class Controller implements Initializable{
         double duration = media.getDuration().toSeconds();
         mediaPlayer.seek(Duration.seconds(duration * spot));
         //System.out.println("jumped to: " + duration * spot);
+    }
+
+    public void changeDirectory(ActionEvent event){
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setInitialDirectory(new File("C:\\"));  // C is the default directory
+        File selectedDirectory = chooser.showDialog(null);
+        System.out.println("selected " + selectedDirectory );
+        if(selectedDirectory == null){  // do nothing if the user cancels
+            return;
+        }
+
+        directory = selectedDirectory;
+        files = directory.listFiles();
+        ArrayList<File> newSongs = addAllSongs();
+
+        // only play if the new directory contains songs
+        if(newSongs.size() > 0){
+            songs = new ArrayList<>(newSongs);
+            songNumber = -1;
+        }
+
+    }
+
+    public ArrayList<File> addAllSongs(){
+        ArrayList<File> songs = new ArrayList<>();
+
+        if(files != null){
+            for(File file : files){
+                String fileName = file.getName();
+                int i = fileName.lastIndexOf(".");
+                String extension = fileName.substring(i + 1);
+                if(extension.equals("mp3")){
+                    songs.add(file);
+                    System.out.println(file);
+                }
+            }
+        }
+        return songs;
     }
 
     public void progressBarOnDragged(MouseEvent event){
