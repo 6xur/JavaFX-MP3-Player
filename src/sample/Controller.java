@@ -69,7 +69,7 @@ public class Controller implements Initializable{
 
         songs = new ArrayList<>();
 
-        directory = new File("C:\\Users\\Robert\\Music");
+        directory = new File("music");
 
         files = directory.listFiles();
 
@@ -89,7 +89,8 @@ public class Controller implements Initializable{
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
-        songLabel.setText(songs.get(songNumber).getName());
+        // the regex removes the .mp3 extension
+        songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
         mediaPlayer.setOnReady(new Runnable() {
             @Override
             public void run() {
@@ -149,7 +150,7 @@ public class Controller implements Initializable{
             public void run() {
                 String duration = formatSeconds(media.getDuration().toSeconds());
                 durationLabel.setText(duration);
-                songLabel.setText(songs.get(songNumber).getName());
+                songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
             }
         });
 
@@ -177,7 +178,7 @@ public class Controller implements Initializable{
             public void run() {
                 String duration = formatSeconds(media.getDuration().toSeconds());
                 durationLabel.setText(duration);
-                songLabel.setText(songs.get(songNumber).getName());
+                songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
             }
         });
 
@@ -288,6 +289,9 @@ public class Controller implements Initializable{
     }
 
     public void minimize(ActionEvent event){
+        // need this so hover works properly
+        playButton.requestFocus();
+
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setIconified(true);
     }
