@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="200.0" prefWidth="550.0" styleClass="pane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="195.0" prefWidth="550.0" styleClass="pane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="112.0" layoutY="-2.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
       <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="39.0" prefHeight="70.0" prefWidth="530.0" text="song_name" textAlignment="CENTER" textFill="#e5e5e5" wrapText="true">
@@ -17,11 +17,11 @@
             <Font name="Segoe UI Semibold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="nextButton" focusTraversable="false" layoutX="101.0" layoutY="130.0" mnemonicParsing="false" onAction="#nextMedia" styleClass="next-button" text="⏭" textFill="#e5e5e5">
+      <Button fx:id="nextButton" focusTraversable="false" layoutX="115.0" layoutY="127.0" mnemonicParsing="false" onAction="#nextMedia" styleClass="generic-button" text="⏭" textFill="#e5e5e5">
          <font>
             <Font size="26.0" />
          </font></Button>
-      <Button fx:id="previousButton" focusTraversable="false" layoutX="-5.0" layoutY="130.0" mnemonicParsing="false" onAction="#previousMedia" styleClass="next-button" text="⏮" textFill="#e5e5e5">
+      <Button fx:id="previousButton" focusTraversable="false" layoutY="127.0" mnemonicParsing="false" onAction="#previousMedia" styleClass="generic-button" text="⏮" textFill="#e5e5e5">
          <font>
             <Font size="26.0" />
          </font></Button>
@@ -31,7 +31,7 @@
             <Font name="Segoe UI Emoji" size="10.0" />
          </font></Button>
       <Line endX="390.0" endY="2.0" layoutX="160.0" layoutY="25.0" startX="-164.7666778564453" startY="2.0" stroke="#787979" strokeWidth="0.2" />
-      <Button fx:id="playButton" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="45.0" layoutY="125.0" maxHeight="70.0" mnemonicParsing="false" onAction="#toggleMedia" prefHeight="70.0" prefWidth="60.0" styleClass="play-button" text="▶" textAlignment="CENTER" textFill="#e5e5e5" textOverrun="CLIP">
+      <Button fx:id="playButton" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="55.0" layoutY="123.0" maxHeight="70.0" mnemonicParsing="false" onAction="#toggleMedia" prefHeight="70.0" prefWidth="60.0" styleClass="play-button" text="▶" textAlignment="CENTER" textFill="#e5e5e5" textOverrun="CLIP">
          <font>
             <Font size="48.0" />
          </font>
@@ -45,17 +45,26 @@
          </font></Button>
       <Label fx:id="playedTimeLabel" layoutX="9.0" layoutY="92.0" prefHeight="18.0" prefWidth="80.0" text="played_time" textFill="#787979">
          <font>
-            <Font name="Segoe UI Semibold" size="10.0" />
+            <Font name="Segoe UI Semibold" size="11.0" />
          </font>
       </Label>
       <Label fx:id="durationLabel" alignment="CENTER_RIGHT" layoutX="462.0" layoutY="92.0" prefHeight="18.0" prefWidth="80.0" text="duration" textFill="#787979">
          <font>
-            <Font name="Segoe UI Semibold" size="10.0" />
+            <Font name="Segoe UI Semibold" size="11.0" />
          </font>
       </Label>
       <Button fx:id="chooseButton" focusTraversable="false" mnemonicParsing="false" onAction="#changeDirectory" prefHeight="26.0" prefWidth="33.0" styleClass="minimize-button" text="☰" textFill="#e5e5e5" wrapText="true">
          <font>
-            <Font name="Segoe UI Black" size="10.0" />
+            <Font name="Segoe UI Black" size="12.0" />
+         </font></Button>
+      <Button focusTraversable="false" layoutX="435.0" layoutY="127.0" mnemonicParsing="false" onAction="#shuffle" prefHeight="56.0" prefWidth="56.8" styleClass="generic-button" text="🔀" textFill="#e5e5e5" wrapText="true">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button layoutX="488.0" layoutY="127.0" mnemonicParsing="false" onAction="#searchMedia" prefHeight="56.0" prefWidth="56.8" rotate="90.0" styleClass="generic-button" text="⚫⚫⚫" textFill="#e5e5e5">
+         <font>
+            <Font name="Segoe UI Semibold" size="7.0" />
          </font></Button>
    </children>
 </AnchorPane>

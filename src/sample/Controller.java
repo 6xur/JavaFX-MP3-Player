@@ -17,11 +17,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Controller implements Initializable{
 
@@ -170,13 +169,13 @@ public class Controller implements Initializable{
             }
         });
 
+        System.out.println(songNumber);
         playMedia();
     }
 
     public void skipTo(double spot){
         double duration = media.getDuration().toSeconds();
         mediaPlayer.seek(Duration.seconds(duration * spot));
-        //System.out.println("jumped to: " + duration * spot);
     }
 
     public void changeDirectory(ActionEvent event){
@@ -197,7 +196,6 @@ public class Controller implements Initializable{
             songs = new ArrayList<>(newSongs);
             songNumber = -1;
         }
-
     }
 
     public ArrayList<File> addAllSongs(){
@@ -237,7 +235,6 @@ public class Controller implements Initializable{
                 playedTimeLabel.setText(playedTime);
             });
         }
-
     }
 
     public void progressBarOnReleased(MouseEvent event){
@@ -320,6 +317,24 @@ public class Controller implements Initializable{
 
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    public void shuffle(ActionEvent event){
+        Collections.shuffle(songs);
+
+        System.out.println("");
+        for(File song : songs){
+            System.out.println(song);
+        }
+
+        songNumber = -1;
+    }
+
+    public void searchMedia(ActionEvent event) throws URISyntaxException, IOException {
+        String songName = songs.get(songNumber).getName().replaceFirst("[.][^.]+$", "");
+        songName = songName.replaceAll(" ", "+");  // format for youtube
+        String link = "https://www.youtube.com/results?search_query=".concat(songName);
+        java.awt.Desktop.getDesktop().browse(new java.net.URI(link));
     }
 
 }

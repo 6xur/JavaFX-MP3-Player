@@ -13,11 +13,11 @@
     -fx-background-color: linear-gradient(to right top, #E44D26, #F16529);
 }
 
-.next-button {
+.generic-button {
     -fx-background-color:transparent;
 }
 
-.next-button:hover{
+.generic-button:hover{
     -fx-text-fill: #ffffff;
 }
 
