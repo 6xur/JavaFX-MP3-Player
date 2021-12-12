@@ -23,13 +23,7 @@ import java.util.*;
 public class Controller implements Initializable{
 
     @FXML
-    private Button chooseButton;
-    @FXML
     private Button playButton;
-    @FXML
-    private Button previousButton;
-    @FXML
-    private Button nextButton;
     @FXML
     private Label songLabel;
     @FXML
@@ -40,10 +34,6 @@ public class Controller implements Initializable{
     private AnchorPane anchorPane;
     @FXML
     private ProgressBar songProgressBar;
-    @FXML
-    private Button logOutButton;
-    @FXML
-    private Button minimizeButton;
 
     private Media media;
     private  MediaPlayer mediaPlayer;
@@ -76,14 +66,11 @@ public class Controller implements Initializable{
 
         // the regex removes the .mp3 extension
         songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                String playedTime = formatSeconds(mediaPlayer.getCurrentTime().toSeconds());
-                String duration = formatSeconds(media.getDuration().toSeconds());
-                playedTimeLabel.setText(playedTime);
-                durationLabel.setText(duration);
-            }
+        mediaPlayer.setOnReady(() -> {
+            String playedTime = formatSeconds(mediaPlayer.getCurrentTime().toSeconds());
+            String duration = formatSeconds(media.getDuration().toSeconds());
+            playedTimeLabel.setText(playedTime);
+            durationLabel.setText(duration);
         });
     }
 
@@ -130,13 +117,10 @@ public class Controller implements Initializable{
         mediaPlayer = new MediaPlayer(media);
 
         // need setOnReady here
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                String duration = formatSeconds(media.getDuration().toSeconds());
-                durationLabel.setText(duration);
-                songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
-            }
+        mediaPlayer.setOnReady(() -> {
+            String duration = formatSeconds(media.getDuration().toSeconds());
+            durationLabel.setText(duration);
+            songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
         });
 
         playMedia();
@@ -158,16 +142,12 @@ public class Controller implements Initializable{
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                String duration = formatSeconds(media.getDuration().toSeconds());
-                durationLabel.setText(duration);
-                songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
-            }
+        mediaPlayer.setOnReady(() -> {
+            String duration = formatSeconds(media.getDuration().toSeconds());
+            durationLabel.setText(duration);
+            songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
         });
 
-        System.out.println(songNumber);
         playMedia();
     }
 
@@ -176,7 +156,7 @@ public class Controller implements Initializable{
         mediaPlayer.seek(Duration.seconds(duration * spot));
     }
 
-    public void changeDirectory(ActionEvent event){
+    public void changeDirectory(){
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setInitialDirectory(new File("C:\\"));  // C is the default directory
         File selectedDirectory = chooser.showDialog(null);
@@ -229,9 +209,7 @@ public class Controller implements Initializable{
         double length = percent * duration;
         String playedTime = formatSeconds(length);
         if(0 < length && length < duration){
-            Platform.runLater(() -> {
-                playedTimeLabel.setText(playedTime);
-            });
+            Platform.runLater(() -> playedTimeLabel.setText(playedTime));
         }
     }
 
@@ -267,14 +245,9 @@ public class Controller implements Initializable{
                     playedTimeLabel.setText(playedTime);
                 });
 
-                if(current/end == 1){  // song ends
+                if(current/end == 1){  // end of the song
 
-                    Platform.runLater(new Runnable(){
-                        @Override
-                        public void run() {
-                            nextMedia();
-                        }
-                    });
+                    Platform.runLater(() -> nextMedia());
 
                 }
             }
@@ -301,7 +274,7 @@ public class Controller implements Initializable{
         stage.setY(event.getScreenY() + dY);
     }
 
-    public void logout(ActionEvent event){
+    public void logout(){
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         if(running){
             pauseMedia();
@@ -309,7 +282,7 @@ public class Controller implements Initializable{
         stage.close();
     }
 
-    public void minimize(ActionEvent event){
+    public void minimize(){
         // need this so hover works properly
         playButton.requestFocus();
 
@@ -317,10 +290,10 @@ public class Controller implements Initializable{
         stage.setIconified(true);
     }
 
-    public void shuffle(ActionEvent event){
+    public void shuffle(){
         Collections.shuffle(songs);
 
-        System.out.println("");
+        System.out.println();
         for(File song : songs){
             System.out.println(song);
         }
@@ -328,7 +301,7 @@ public class Controller implements Initializable{
         songNumber = -1;
     }
 
-    public void searchMedia(ActionEvent event) throws URISyntaxException, IOException {
+    public void searchMedia() throws URISyntaxException, IOException {
         String songName = songs.get(songNumber).getName().replaceFirst("[.][^.]+$", "");
         songName = songName.replaceAll(" ", "+");  // format for youtube
         String link = "https://www.youtube.com/results?search_query=".concat(songName);

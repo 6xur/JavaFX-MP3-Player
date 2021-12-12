@@ -14,7 +14,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="112.0" layoutY="-2.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
       <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="39.0" prefHeight="70.0" prefWidth="530.0" text="song_name" textAlignment="CENTER" textFill="#e5e5e5" wrapText="true">
          <font>
-            <Font name="Segoe UI Semibold" size="18.0" />
+            <Font name="Segoe UI Semibold" size="20.0" />
          </font>
       </Label>
       <Button fx:id="nextButton" focusTraversable="false" layoutX="116.0" layoutY="127.0" mnemonicParsing="false" onAction="#nextMedia" styleClass="generic-button" text="⏭" textFill="#e5e5e5">
