@@ -12,7 +12,7 @@
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#setOnMouseDragged" onMousePressed="#setOnMousePressed" prefHeight="195.0" prefWidth="550.0" styleClass="pane" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#303030" height="112.0" layoutY="-2.0" stroke="#303030" strokeType="INSIDE" width="550.0" />
-      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="39.0" prefHeight="70.0" prefWidth="530.0" text="song_name" textAlignment="CENTER" textFill="#e5e5e5" wrapText="true">
+      <Label fx:id="songLabel" alignment="CENTER" layoutX="10.0" layoutY="35.0" prefHeight="70.0" prefWidth="530.0" text="song_name" textAlignment="CENTER" textFill="#e5e5e5" wrapText="true">
          <font>
             <Font name="Segoe UI Semibold" size="20.0" />
          </font>
