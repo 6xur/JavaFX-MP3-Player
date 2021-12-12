@@ -17,16 +17,16 @@
             <Font name="Segoe UI Semibold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="nextButton" focusTraversable="false" layoutX="116.0" layoutY="127.0" mnemonicParsing="false" onAction="#nextMedia" styleClass="generic-button" text="⏭" textFill="#e5e5e5">
+      <Button focusTraversable="false" layoutX="116.0" layoutY="127.0" mnemonicParsing="false" onAction="#nextMedia" styleClass="generic-button" text="⏭" textFill="#e5e5e5">
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Button fx:id="previousButton" focusTraversable="false" layoutY="127.0" mnemonicParsing="false" onAction="#previousMedia" styleClass="generic-button" text="⏮" textFill="#e5e5e5">
+      <Button focusTraversable="false" layoutY="127.0" mnemonicParsing="false" onAction="#previousMedia" styleClass="generic-button" text="⏮" textFill="#e5e5e5">
          <font>
             <Font size="25.0" />
          </font></Button>
       <ProgressBar fx:id="songProgressBar" focusTraversable="false" layoutY="110.0" onMouseDragged="#progressBarOnDragged" onMouseReleased="#progressBarOnReleased" prefHeight="5.0" prefWidth="550.0" progress="0.0" />
-      <Button fx:id="logOutButton" focusTraversable="false" layoutX="516.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="33.0" styleClass="logout-button" text="✖" textFill="#e5e5e5" wrapText="true">
+      <Button focusTraversable="false" layoutX="516.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="33.0" styleClass="logout-button" text="✖" textFill="#e5e5e5" wrapText="true">
          <font>
             <Font name="Segoe UI Emoji" size="12.0" />
          </font></Button>
@@ -39,7 +39,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button fx:id="minimizeButton" focusTraversable="false" layoutX="480.0" mnemonicParsing="false" onAction="#minimize" prefHeight="26.0" prefWidth="33.0" styleClass="minimize-button" text="—" textFill="#e5e5e5" wrapText="true">
+      <Button focusTraversable="false" layoutX="480.0" mnemonicParsing="false" onAction="#minimize" prefHeight="26.0" prefWidth="33.0" styleClass="minimize-button" text="—" textFill="#e5e5e5" wrapText="true">
          <font>
             <Font name="Segoe UI Black" size="12.0" />
          </font></Button>
@@ -53,7 +53,7 @@
             <Font name="Segoe UI Semibold" size="11.0" />
          </font>
       </Label>
-      <Button fx:id="chooseButton" focusTraversable="false" mnemonicParsing="false" onAction="#changeDirectory" prefHeight="26.0" prefWidth="33.0" styleClass="minimize-button" text="☰" textFill="#e5e5e5" wrapText="true">
+      <Button focusTraversable="false" mnemonicParsing="false" onAction="#changeDirectory" prefHeight="26.0" prefWidth="33.0" styleClass="minimize-button" text="☰" textFill="#e5e5e5" wrapText="true">
          <font>
             <Font name="Segoe UI Black" size="12.0" />
          </font></Button>
