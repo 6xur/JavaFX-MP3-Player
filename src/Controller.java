@@ -41,7 +41,6 @@ public class Controller implements Initializable{
     private File[] files;
 
     private ArrayList<File> songs;
-
     private int songNumber = 0;
 
     private Timer timer;
@@ -63,8 +62,7 @@ public class Controller implements Initializable{
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
-        // the regex removes the .mp3 extension
-        songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));
+        songLabel.setText(songs.get(songNumber).getName().replaceFirst("[.][^.]+$", ""));  // removes the mp3 extension
         mediaPlayer.setOnReady(() -> {
             String playedTime = formatSeconds(mediaPlayer.getCurrentTime().toSeconds());
             String duration = formatSeconds(media.getDuration().toSeconds());
@@ -216,7 +214,7 @@ public class Controller implements Initializable{
         Bounds bound = songProgressBar.getLayoutBounds();
         double mouseX = event.getSceneX();
         double percent = (((bound.getMinX() + mouseX)) / bound.getMaxX());
-        if(percent < 0){  // restart the song if dragged to the origin
+        if(percent < 0){  // restart the song if dragged past the origin
             skipTo(0);
         } else{
             skipTo(percent);
@@ -300,6 +298,7 @@ public class Controller implements Initializable{
         songNumber = -1;
     }
 
+    // search for YT for a song
     public void searchMedia() throws URISyntaxException, IOException {
         String songName = songs.get(songNumber).getName().replaceFirst("[.][^.]+$", "");
         songName = songName.replaceAll(" ", "+");  // format for youtube
