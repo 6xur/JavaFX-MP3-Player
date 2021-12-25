@@ -31,7 +31,7 @@
             <Font name="Segoe UI Emoji" size="12.0" />
          </font></Button>
       <Line endX="390.0" endY="2.0" layoutX="160.0" layoutY="25.0" startX="-164.7666778564453" startY="2.0" stroke="#787979" strokeWidth="0.2" />
-      <Button fx:id="playButton" alignment="TOP_CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="55.0" layoutY="123.0" maxHeight="70.0" mnemonicParsing="false" onAction="#toggleMedia" prefHeight="70.0" prefWidth="60.0" styleClass="play-button" text="▶" textAlignment="CENTER" textFill="#e5e5e5" textOverrun="CLIP">
+      <Button fx:id="playButton" alignment="TOP_LEFT" contentDisplay="CENTER" focusTraversable="false" layoutX="55.0" layoutY="123.0" maxHeight="70.0" mnemonicParsing="false" onAction="#toggleMedia" prefHeight="70.0" prefWidth="60.0" styleClass="play-button" text="▶" textAlignment="CENTER" textFill="#e5e5e5" textOverrun="CLIP">
          <font>
             <Font size="47.0" />
          </font>
